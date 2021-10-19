@@ -1,25 +1,48 @@
-import logo from './logo.svg';
+import HomeScreen from './components/pages/HomeScreen';
+import Favorites from './components/pages/Favorites';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Grid } from '@mui/material';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+          <Navbar />
+          </Grid>
+          <Grid item xs={12} marginTop={10} > 
+          <Switch>
+            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/favorites" component={Favorites} />
+          </Switch>
+          </Grid>
+          
+        </Grid>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
+{
+  /* 
+<Grid container spacing={2}>
+  <Grid item xs={8}>
+    <Item>xs=8</Item>
+  </Grid>
+  <Grid item xs={4}>
+    <Item>xs=4</Item>
+  </Grid>
+  <Grid item xs={4}>
+    <Item>xs=4</Item>
+  </Grid>
+  <Grid item xs={8}>
+    <Item>xs=8</Item>
+  </Grid>
+</Grid> */
+}
