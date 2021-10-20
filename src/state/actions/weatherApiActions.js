@@ -37,7 +37,6 @@ export const locationsAutocomplete = (searchInput) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error);
     const errors = error.response;
     if (errors) {
       errors.forEach((e) => {
@@ -60,6 +59,7 @@ export const setCurrentLocation = (location) => async (dispatch) => {
 
 export const setMyLocation = (lat, lon) => async (dispatch) => {
   try {
+    console.log('got the location..')
     const { data } = await axios.get(
       `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${lat},${lon}&apikey=${accuWeatherApiKey}`
     );

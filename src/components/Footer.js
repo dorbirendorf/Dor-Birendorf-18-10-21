@@ -13,11 +13,9 @@ import { connect } from 'react-redux';
 const Footer = ({ theme:{darkMode},toggleDark, toggleDegrees }) => {
   
   const handleToggleDark = () => {
-    console.log('dark');
     toggleDark();
   };
   const handleToggleDegrees = () => {
-    console.log('degrees');
     toggleDegrees();
   };
 
