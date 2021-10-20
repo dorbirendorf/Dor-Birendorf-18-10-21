@@ -39,8 +39,8 @@ const SearchBox = ({
         spacing={2}
         marginBottom={4}
         sx={{
-          bgcolor:  '#f8f9fa',
-          color: darkMode ? '#f8f9fa' : '#343a40',
+          bgcolor:  "#E5EAEF",
+          color: darkMode ? "#E5EAEF" : '#343a40',
         }}
       >
         <Autocomplete

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   getCurrentWeather,
-  setCurrentLocation,
   setMyLocation,
 } from '../state/actions/weatherApiActions';
 import {
@@ -20,7 +19,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import {
   removeFavorite,
-  getFavorites,
   addFavorite,
   checkIfFavoriteExist,
 } from '../utils/ManageFavorites';
@@ -36,16 +34,14 @@ const CurrentWeatherCard = ({
 
   useEffect(() => {
     if (!location) {
-      console.log('no location');
       navigator.geolocation.getCurrentPosition((position) => {
         setMyLocation(position.coords.latitude, position.coords.longitude);
-        console.log('still no location2');
       });
     } else {
       getCurrentWeather(location.Key);
       setToggleFavorite(checkIfFavoriteExist(location.Key));
     }
-  }, [location, setCurrentLocation]);
+  }, [location,getCurrentWeather,setMyLocation]);
 
   const handleFavoriteClick = () => {
     checkIfFavoriteExist(location.Key)
@@ -53,6 +49,7 @@ const CurrentWeatherCard = ({
       : addFavorite(location);
     setToggleFavorite(!toggleFavorite);
   };
+
 
   return (
     <div>
@@ -64,8 +61,8 @@ const CurrentWeatherCard = ({
             sx={{
               width: '50%',
               marginBottom: 6,
-              bgcolor: darkMode ? '#343a40' : '#f8f9fa',
-              color: darkMode ? '#f8f9fa' : '#343a40',
+              bgcolor: darkMode ? '#343a40' : "#E5EAEF",
+              color: darkMode ? "#E5EAEF" : '#343a40',
             }}
           >
             <CardHeader

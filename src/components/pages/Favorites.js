@@ -3,7 +3,7 @@ import { getFavorites } from '../../utils/ManageFavorites';
 import SmallConditionsCard from '../SmallConditionsCard';
 import { connect } from 'react-redux';
 import { getFavoriteWeather } from '../../state/actions/weatherApiActions';
-import { Grid, Typography,  } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Favorites = ({ weather, theme, getFavoriteWeather }) => {
@@ -16,19 +16,21 @@ const Favorites = ({ weather, theme, getFavoriteWeather }) => {
 
   const FavoriteWeatherCards = weather.favoritesWeather.map(
     (favoriteLocation) => (
-      <Grid item xs={12} md={4} lg={2} Key={favoriteLocation.location.Key}>
-          <SmallConditionsCard data={favoriteLocation} />
+      <Grid item xs={12} md={4} lg={2} key={favoriteLocation.location.Key}>
+        <SmallConditionsCard data={favoriteLocation} />
       </Grid>
     )
   );
 
   return (
     <div>
-      <Typography variant='h3' textAlign='center'>Favorites <FavoriteIcon color="error"/></Typography>
+      <Typography variant="h3" textAlign="center">
+        Favorites <FavoriteIcon color="error" />
+      </Typography>
 
-    <Grid container spacing={2}>
-      {FavoriteWeatherCards}
-    </Grid>
+      <Grid container spacing={2}>
+        {FavoriteWeatherCards}
+      </Grid>
     </div>
   );
 };

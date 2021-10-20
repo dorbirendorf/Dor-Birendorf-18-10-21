@@ -2,15 +2,11 @@ import React from 'react';
 import {
   Typography,
   Card,
-  CardMedia,
   CardContent,
-  IconButton,
   CardHeader,
-  CardActions,
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import WeatherIconSmall from './layout/WeatherIconSmall';
-import{formatDate,convertToFarenheit,formatMinMax} from '../utils/format'
+import{formatDate,formatMinMax} from '../utils/format'
 
 
 export const FiveDaysForcastCard = ({ forecast, degrees,darkMode }) => {
@@ -18,8 +14,8 @@ export const FiveDaysForcastCard = ({ forecast, degrees,darkMode }) => {
     <div>
       <Card sx={{ 
         textAlign: 'center',
-        bgcolor:darkMode?'#343a40':'#f8f9fa',
-        color:darkMode? '#f8f9fa':'#343a40'  }}>
+        bgcolor:darkMode?'#343a40':"#E5EAEF",
+        color:darkMode? "#E5EAEF":'#343a40'  }}>
         <CardHeader
           
           title={formatDate(forecast.Date)}

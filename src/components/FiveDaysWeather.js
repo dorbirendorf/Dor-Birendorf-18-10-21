@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Spinner from './layout/Spinner';
-import { Grid, Typography, Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 
-import {
-  getCurrentWeather,
-  getFiveDaysWeather,
-} from '../state/actions/weatherApiActions';
+import { getFiveDaysWeather } from '../state/actions/weatherApiActions';
 import { FiveDaysForcastCard } from './FiveDaysForcastCard';
 
 const FiveDaysWeather = ({
@@ -29,13 +26,10 @@ const FiveDaysWeather = ({
       ) : (
         <div>
           <Box>
-            <Grid
-              container
-              sx={{ justifyContent: 'center', justifyContent: 'space-evenly' }}
-            >
+            <Grid container sx={{ justifyContent: 'space-between' }}>
               {fiveDaysWeather.DailyForecasts &&
                 fiveDaysWeather.DailyForecasts.map((dayForecast) => (
-                  <Grid item xs={6} sm={2}>
+                  <Grid item xs={6} sm={2} key={dayForecast.Date}>
                     <FiveDaysForcastCard
                       forecast={dayForecast}
                       degrees={celcius}
@@ -59,4 +53,3 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getFiveDaysWeather,
 })(FiveDaysWeather);
-

@@ -1,12 +1,8 @@
 import * as React from 'react';
 import {
   Button,
-  Switch,
-  FormGroup,
-  FormControlLabel,
   Typography,
   Toolbar,
-  Box,
   AppBar,
   Link
 } from '@mui/material';
@@ -18,8 +14,8 @@ const Navbar = ({ theme:{darkMode}}) => {
 
   return (
     
-      <AppBar position="fixed" sx={{bgcolor:darkMode?'#343a40':'#f8f9fa',
-      color:darkMode? '#f8f9fa':'#343a40'}}>
+      <AppBar position="fixed" sx={{bgcolor:darkMode?'#343a40':"#E5EAEF",
+      color:darkMode? "#E5EAEF":'#343a40'}}>
         <Toolbar>
           <Link href="/" color="inherit" underline='none' >
           <WbSunnyIcon />

@@ -13,6 +13,8 @@ import axios from 'axios';
 import { setAlert } from './alertActions';
 
 const api = [
+  'Zct9JiWDGrs5loLq7s9dMgW0ySp5Bsp2',
+  '',
   'WJ9kOJdwSpEsVz3E6l5ULWiPpX8JoJL0',
   'rYBVyyZFhtZkPwiQI6eQWaIYipiGFVma',
   '8MIzGGl33vxvfOwRUAaO7amkjot7RP42',
@@ -59,7 +61,6 @@ export const setCurrentLocation = (location) => async (dispatch) => {
 
 export const setMyLocation = (lat, lon) => async (dispatch) => {
   try {
-    console.log('got the location..')
     const { data } = await axios.get(
       `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${lat},${lon}&apikey=${accuWeatherApiKey}`
     );
@@ -71,14 +72,7 @@ export const setMyLocation = (lat, lon) => async (dispatch) => {
         name: data.LocalizedName,
       },
     });
-  } catch (error) {
-    const errors = error.response;
-    if (errors) {
-      errors.forEach((e) => {
-        dispatch(setAlert(e.msg, 'danger'));
-      });
-    }
-  }
+  } catch (error) {}
 };
 
 export const getCurrentWeather = (locationKey) => async (dispatch) => {
@@ -93,12 +87,6 @@ export const getCurrentWeather = (locationKey) => async (dispatch) => {
         payload: data,
       });
     } catch (error) {
-      const errors = error.response;
-      if (errors) {
-        errors.forEach((e) => {
-          dispatch(setAlert(e.msg, 'danger'));
-        });
-      }
       dispatch({
         type: CURRENT_WEATHER_FAIL,
         payload: error.message,
@@ -118,12 +106,6 @@ export const getFiveDaysWeather = (locationKey) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    const errors = error.response;
-    if (errors) {
-      errors.forEach((e) => {
-        dispatch(setAlert(e.msg, 'danger'));
-      });
-    }
     dispatch({
       type: FIVE_DAYS_FAIL,
       payload: error.message,
@@ -144,12 +126,6 @@ export const getFavoriteWeather = (location) => async (dispatch) => {
       },
     });
   } catch (error) {
-    const errors = error.response;
-    if (errors) {
-      errors.forEach((e) => {
-        dispatch(setAlert(e.msg, 'danger'));
-      });
-    }
     dispatch({
       type: FAVORITES_WEATHER_FAIL,
       payload: error.message,

@@ -1,22 +1,14 @@
 import React from 'react';
 import {
-  Grid,
   Typography,
-  Box,
   Card,
   CardHeader,
   CardContent,
   CardActions,
-  IconButton,
   Button,
 } from '@mui/material';
 import WeatherIconSmall from './layout/WeatherIconSmall';
-import {
-  formatDate,
-  convertToFarenheit,
-  formatMinMax,
-  formatTemp,
-} from '../utils/format';
+import { formatTemp } from '../utils/format';
 import { connect } from 'react-redux';
 import { setCurrentLocation } from '../state/actions/weatherApiActions';
 import { useHistory } from 'react-router-dom';
@@ -35,8 +27,8 @@ const SmallConditionsCard = ({ data, theme, setCurrentLocation }) => {
       <Card
         sx={{
           inlineSize: 'fit',
-          bgcolor: darkMode ? '#343a40' : '#f8f9fa',
-          color: darkMode ? '#f8f9fa' : '#343a40',
+          bgcolor: darkMode ? '#343a40' : '#E5EAEF',
+          color: darkMode ? '#E5EAEF' : '#343a40',
           textAlign: 'center',
         }}
       >
