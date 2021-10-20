@@ -6,6 +6,7 @@ import { Grid } from '@mui/material';
 import darkBack from './assets/darkBack.png';
 import lightBack from './assets/lightBack.jpg';
 import Footer from './components/Footer';
+import Alert from './components/layout/Alert'
 
 import './App.css';
 
@@ -32,6 +33,8 @@ function App() {
           <Grid item xs={12}>
             <Navbar />
           </Grid>
+          
+          <Alert/>
           <Grid item xs={12} marginTop={10}>
             <Switch>
               <Route exact path="/" component={HomeScreen} />
@@ -49,20 +52,3 @@ function App() {
 
 export default App;
 
-{
-  /* 
-<Grid container spacing={2}>
-  <Grid item xs={8}>
-    <Item>xs=8</Item>
-  </Grid>
-  <Grid item xs={4}>
-    <Item>xs=4</Item>
-  </Grid>
-  <Grid item xs={4}>
-    <Item>xs=4</Item>
-  </Grid>
-  <Grid item xs={8}>
-    <Item>xs=8</Item>
-  </Grid>
-</Grid> */
-}

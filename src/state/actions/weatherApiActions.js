@@ -10,6 +10,7 @@ import {
   FAVORITES_WEATHER_FAIL,
 } from './types';
 import axios from 'axios';
+import { setAlert } from './alertActions';
 
 const api = [
   'WJ9kOJdwSpEsVz3E6l5ULWiPpX8JoJL0',
@@ -35,10 +36,17 @@ export const locationsAutocomplete = (searchInput) => async (dispatch) => {
       type: LOCATIONS_AUTOCOMPLETE_SUCCESS,
       payload: data,
     });
-  } catch (err) {
+  } catch (error) {
+    console.log(error);
+    const errors = error.response;
+    if (errors) {
+      errors.forEach((e) => {
+        dispatch(setAlert(e.msg, 'danger'));
+      });
+    }
     dispatch({
       type: LOCATIONS_AUTOCOMPLETE_ERROR,
-      payload: err.message,
+      payload: error.message,
     });
   }
 };
@@ -51,24 +59,31 @@ export const setCurrentLocation = (location) => async (dispatch) => {
 };
 
 export const setMyLocation = (lat, lon) => async (dispatch) => {
-  const { data } = await axios.get(
-    `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${lat},${lon}&apikey=${accuWeatherApiKey}`
-  );
-  const { Key } = data;
-  console.log(data);
-  dispatch({
-    type: CURRENT_LOCATION_UPDATE,
-    payload: {
-      Key: Key,
-      name: data.LocalizedName,
-    },
-  });
+  try {
+    const { data } = await axios.get(
+      `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${lat},${lon}&apikey=${accuWeatherApiKey}`
+    );
+    const { Key } = data;
+    dispatch({
+      type: CURRENT_LOCATION_UPDATE,
+      payload: {
+        Key: Key,
+        name: data.LocalizedName,
+      },
+    });
+  } catch (error) {
+    const errors = error.response;
+    if (errors) {
+      errors.forEach((e) => {
+        dispatch(setAlert(e.msg, 'danger'));
+      });
+    }
+  }
 };
 
 export const getCurrentWeather = (locationKey) => async (dispatch) => {
   if (locationKey) {
     try {
-      console.log('getting CurrentWeather:', locationKey);
       const { data } = await axios.get(
         `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${accuWeatherApiKey}`
       );
@@ -78,6 +93,12 @@ export const getCurrentWeather = (locationKey) => async (dispatch) => {
         payload: data,
       });
     } catch (error) {
+      const errors = error.response;
+      if (errors) {
+        errors.forEach((e) => {
+          dispatch(setAlert(e.msg, 'danger'));
+        });
+      }
       dispatch({
         type: CURRENT_WEATHER_FAIL,
         payload: error.message,
@@ -97,6 +118,12 @@ export const getFiveDaysWeather = (locationKey) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
+    const errors = error.response;
+    if (errors) {
+      errors.forEach((e) => {
+        dispatch(setAlert(e.msg, 'danger'));
+      });
+    }
     dispatch({
       type: FIVE_DAYS_FAIL,
       payload: error.message,
@@ -117,6 +144,12 @@ export const getFavoriteWeather = (location) => async (dispatch) => {
       },
     });
   } catch (error) {
+    const errors = error.response;
+    if (errors) {
+      errors.forEach((e) => {
+        dispatch(setAlert(e.msg, 'danger'));
+      });
+    }
     dispatch({
       type: FAVORITES_WEATHER_FAIL,
       payload: error.message,
