@@ -7,11 +7,16 @@ import {
   setCurrentLocation,
 } from '../state/actions/weatherApiActions';
 
-const SearchBox = (props) => {
+const SearchBox = ({
+  weather: { autoCompleteLocations },
+  theme: { darkMode },
+  locationsAutocomplete,
+  setCurrentLocation,
+}) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event, newInputValue) => {
-    props.locationsAutocomplete(newInputValue);
+    locationsAutocomplete(newInputValue);
   };
 
   const handleChange = (event, newInputValue) => {
@@ -20,7 +25,7 @@ const SearchBox = (props) => {
 
   const handleSubmit = (event) => {
     if (inputValue) {
-      props.setCurrentLocation({
+      setCurrentLocation({
         Key: inputValue.Key,
         name: inputValue.LocalizedName,
       });
@@ -29,14 +34,18 @@ const SearchBox = (props) => {
 
   return (
     <div>
-      <Stack direction="row" spacing={2} marginBottom={4}>
+      <Stack
+        direction="row"
+        spacing={2}
+        marginBottom={4}
+        sx={{
+          bgcolor:  '#f8f9fa',
+          color: darkMode ? '#f8f9fa' : '#343a40',
+        }}
+      >
         <Autocomplete
           id="location-search-bar"
-          options={
-            props.weather.autoCompleteLocations
-              ? props.weather.autoCompleteLocations
-              : []
-          }
+          options={autoCompleteLocations ? autoCompleteLocations : []}
           fullWidth
           getOptionLabel={(city) =>
             `${city.LocalizedName} , ${city.Country.LocalizedName} , ${city.Key}`
@@ -44,12 +53,12 @@ const SearchBox = (props) => {
           onInputChange={handleInputChange}
           onChange={handleChange}
           renderInput={(params) => (
-            <TextField {...params} label="Location" variant="outlined" />
+            <TextField {...params} label="Location" variant="standard" />
           )}
         />
         <Button
           onClick={handleSubmit}
-          variant="outlined"
+          variant="text"
           size="large"
           startIcon={<SearchIcon />}
         >
@@ -62,7 +71,7 @@ const SearchBox = (props) => {
 
 const mapStateToProps = (state) => ({
   weather: state.weather,
-  theme:state.theme
+  theme: state.theme,
 });
 
 export default connect(mapStateToProps, {

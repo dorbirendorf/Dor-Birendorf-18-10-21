@@ -10,7 +10,8 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { toggleDark, toggleDegrees } from '../state/actions/themeActions';
 import { connect } from 'react-redux';
 
-const Footer = ({ toggleDark, toggleDegrees }) => {
+const Footer = ({ theme:{darkMode},toggleDark, toggleDegrees }) => {
+  
   const handleToggleDark = () => {
     console.log('dark');
     toggleDark();
@@ -21,7 +22,8 @@ const Footer = ({ toggleDark, toggleDegrees }) => {
   };
 
   return (
-    <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, bgcolor:darkMode?'#343a40':'#f8f9fa',
+    color:darkMode? '#f8f9fa':'#343a40' }}>
       <Toolbar>
 
         

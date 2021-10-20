@@ -8,7 +8,7 @@ import {
   CardContent,
   CardActions,
   IconButton,
-  Button
+  Button,
 } from '@mui/material';
 import WeatherIconSmall from './layout/WeatherIconSmall';
 import {
@@ -32,16 +32,23 @@ const SmallConditionsCard = ({ data, theme, setCurrentLocation }) => {
   };
   return (
     <div>
-      <Card sx={{inlineSize: 'fit' }}>
-        <CardHeader onClick={handleClick}
-          sx={{ background: 'ghostwhite' }}
+      <Card
+        sx={{
+          inlineSize: 'fit',
+          bgcolor: darkMode ? '#343a40' : '#f8f9fa',
+          color: darkMode ? '#f8f9fa' : '#343a40',
+          textAlign: 'center',
+        }}
+      >
+        <CardHeader
+          onClick={handleClick}
           title={
             <Typography align="center" variant="h5">
               {location.name}
             </Typography>
           }
         />
-        <CardContent sx={{ textAlign: 'center' }}>
+        <CardContent>
           <WeatherIconSmall
             number={weather[0].WeatherIcon}
             xs={12}
@@ -53,7 +60,9 @@ const SmallConditionsCard = ({ data, theme, setCurrentLocation }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={handleClick}>Learn More </Button>
+          <Button size="small" onClick={handleClick}>
+            Learn More{' '}
+          </Button>
         </CardActions>
       </Card>
     </div>

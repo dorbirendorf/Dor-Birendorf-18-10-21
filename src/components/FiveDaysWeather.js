@@ -39,6 +39,7 @@ const FiveDaysWeather = ({
                     <FiveDaysForcastCard
                       forecast={dayForecast}
                       degrees={celcius}
+                      darkMode={darkMode}
                     />
                   </Grid>
                 ))}

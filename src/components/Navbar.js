@@ -13,12 +13,13 @@ import {
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { connect } from 'react-redux';
 
-const Navbar = ({ weather}) => {
+const Navbar = ({ theme:{darkMode}}) => {
  
 
   return (
     
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{bgcolor:darkMode?'#343a40':'#f8f9fa',
+      color:darkMode? '#f8f9fa':'#343a40'}}>
         <Toolbar>
           <Link href="/" color="inherit" underline='none' >
           <WbSunnyIcon />

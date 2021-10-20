@@ -13,18 +13,21 @@ import WeatherIconSmall from './layout/WeatherIconSmall';
 import{formatDate,convertToFarenheit,formatMinMax} from '../utils/format'
 
 
-export const FiveDaysForcastCard = ({ forecast, degrees }) => {
+export const FiveDaysForcastCard = ({ forecast, degrees,darkMode }) => {
   return (
     <div>
-      <Card>
+      <Card sx={{ 
+        textAlign: 'center',
+        bgcolor:darkMode?'#343a40':'#f8f9fa',
+        color:darkMode? '#f8f9fa':'#343a40'  }}>
         <CardHeader
-          sx={{ textAlign: 'center' , background: 'ghostwhite'  }}
+          
           title={formatDate(forecast.Date)}
           subheader={`${forecast.Day.IconPhrase}`}
         />
         <CardContent sx={{textAlign:"center" }}>
           <WeatherIconSmall number={forecast.Day.Icon} />
-          <Typography variant="body2" color="text.secondary" textAlign="center">
+          <Typography variant="body2"  textAlign="center">
             {formatMinMax(
               forecast.Temperature.Minimum.Value,
               forecast.Temperature.Maximum.Value,
