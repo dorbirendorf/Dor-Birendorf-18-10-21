@@ -14,16 +14,8 @@ import { setAlert } from './alertActions';
 
 const api = [
   'Zct9JiWDGrs5loLq7s9dMgW0ySp5Bsp2',
-  '',
-  'WJ9kOJdwSpEsVz3E6l5ULWiPpX8JoJL0',
-  'rYBVyyZFhtZkPwiQI6eQWaIYipiGFVma',
+  'SBAMTrQzOvBi5NGeuxMI72DNOGPsCJKv',
   '8MIzGGl33vxvfOwRUAaO7amkjot7RP42',
-  'yPu77kXYByuhCrrRLTdrrNqPQmJKi1WO',
-  'FKwlSoqGXQpxkE9rsEAW9hUU15KQxmAG',
-  'O9AFzM6d6HAnPRzuuq1XvGAsCdGNMMgh',
-  'PyDoAhvagvVRatEbkpAC6NS64Qqw7KIP',
-  'b1rtH1c7YGAGM5oe3z8xmeRuenABGxtA',
-  'RYPnuZM3IIH78UxZPGZwy9OOlyklRl98',
 ];
 
 var accuWeatherApiKey = api[Math.floor(Math.random() * api.length)];
