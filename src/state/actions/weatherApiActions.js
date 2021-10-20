@@ -113,7 +113,7 @@ export const getFavoriteWeather = (location) => async (dispatch) => {
       type: FAVORITES_WEATHER_SUCCESS,
       payload: {
         weather: data,
-        locationName: location.name,
+        location: location,
       },
     });
   } catch (error) {

@@ -1,33 +1,70 @@
-import React from 'react'
-import { Grid, Typography, Box,Card,CardHeader,CardContent,CardActions,IconButton } from '@mui/material';
-import WeatherIcon from './layout/WeatherIcon';
-import{formatDate,convertToFarenheit,formatMinMax,formatTemp} from '../utils/format'
+import React from 'react';
+import {
+  Grid,
+  Typography,
+  Box,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  IconButton,
+  Button
+} from '@mui/material';
+import WeatherIconSmall from './layout/WeatherIconSmall';
+import {
+  formatDate,
+  convertToFarenheit,
+  formatMinMax,
+  formatTemp,
+} from '../utils/format';
+import { connect } from 'react-redux';
+import { setCurrentLocation } from '../state/actions/weatherApiActions';
+import { useHistory } from 'react-router-dom';
 
+const SmallConditionsCard = ({ data, theme, setCurrentLocation }) => {
+  const { location, weather } = data;
+  const { darkMode, celcius } = theme;
+  let history = useHistory();
 
-export const SmallConditionsCard = ({data,theme}) => {
-    const{locationName,weather}=data
-    const{darkMode,celcius}=theme
-    return (
-        <div>
-             <Card>
-            <CardHeader
-              sx={{ background: 'ghostwhite' }}
-              title={
-                <Typography align="center" variant="h5">
-                  {locationName}
-                </Typography>
-              }
-            />
-            <CardContent sx={{ textAlign: 'center' }}>
-              <WeatherIcon
-                number={weather[0].WeatherIcon}
-                xs={12}
-                sx={{ maxHeight: 200, maxWidth: 200 }}
-              />
-              <Typography variant="h6">{weather[0].WeatherText}</Typography>
-              <Typography variant="p">{formatTemp(weather[0].Temperature.Metric.Value,celcius)}</Typography>
-            </CardContent>
-          </Card>
-        </div>
-    )
-}
+  const handleClick = () => {
+    setCurrentLocation(location);
+    history.push('/');
+  };
+  return (
+    <div>
+      <Card sx={{inlineSize: 'fit' }}>
+        <CardHeader onClick={handleClick}
+          sx={{ background: 'ghostwhite' }}
+          title={
+            <Typography align="center" variant="h5">
+              {location.name}
+            </Typography>
+          }
+        />
+        <CardContent sx={{ textAlign: 'center' }}>
+          <WeatherIconSmall
+            number={weather[0].WeatherIcon}
+            xs={12}
+            sx={{ maxHeight: 200, maxWidth: 200 }}
+          />
+          <Typography variant="h6">{weather[0].WeatherText}</Typography>
+          <Typography variant="p">
+            {formatTemp(weather[0].Temperature.Metric.Value, celcius)}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={handleClick}>Learn More </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  weather: state.weather,
+  theme: state.theme,
+});
+
+export default connect(mapStateToProps, { setCurrentLocation })(
+  SmallConditionsCard
+);

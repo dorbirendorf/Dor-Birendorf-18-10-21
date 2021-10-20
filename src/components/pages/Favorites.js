@@ -1,35 +1,36 @@
 import React, { useEffect } from 'react';
 import { getFavorites } from '../../utils/ManageFavorites';
-import { SmallConditionsCard } from '../SmallConditionsCard';
+import SmallConditionsCard from '../SmallConditionsCard';
 import { connect } from 'react-redux';
 import { getFavoriteWeather } from '../../state/actions/weatherApiActions';
-import { Col, Row } from 'react-bootstrap';
+import { Grid, Typography,  } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Favorites = ({ weather, theme, getFavoriteWeather }) => {
-
   useEffect(() => {
     const favorites = getFavorites();
-    favorites.map((location) => {
+    favorites.forEach((location) => {
       getFavoriteWeather(location);
     });
   }, [getFavoriteWeather]);
-  
 
   const FavoriteWeatherCards = weather.favoritesWeather.map(
     (favoriteLocation) => (
-      <div>
-        <Row className="justify-content-md-center">
-          <Col md={3} >
-            <SmallConditionsCard data={favoriteLocation} theme={theme} />
-          </Col>
-        </Row>
-      </div>
+      <Grid item xs={12} md={4} lg={2} Key={favoriteLocation.location.Key}>
+          <SmallConditionsCard data={favoriteLocation} />
+      </Grid>
     )
   );
 
-  return <div>
+  return (
+    <div>
+      <Typography variant='h3' textAlign='center'>Favorites <FavoriteIcon color="error"/></Typography>
+
+    <Grid container spacing={2}>
       {FavoriteWeatherCards}
-      </div>;
+    </Grid>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

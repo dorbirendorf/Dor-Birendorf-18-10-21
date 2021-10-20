@@ -18,11 +18,11 @@ export const FiveDaysForcastCard = ({ forecast, degrees }) => {
     <div>
       <Card>
         <CardHeader
-          sx={{ textAlign: 'center' }}
+          sx={{ textAlign: 'center' , background: 'ghostwhite'  }}
           title={formatDate(forecast.Date)}
           subheader={`${forecast.Day.IconPhrase}`}
         />
-        <CardContent sx={{textAlign:"center"}}>
+        <CardContent sx={{textAlign:"center" }}>
           <WeatherIconSmall number={forecast.Day.Icon} />
           <Typography variant="body2" color="text.secondary" textAlign="center">
             {formatMinMax(
