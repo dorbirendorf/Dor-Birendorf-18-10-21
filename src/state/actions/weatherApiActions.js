@@ -16,6 +16,7 @@ const api = process.env.accuWeatherApiKey; // updated using netlify dashboard
 
 var accuWeatherApiKey = api[Math.floor(Math.random() * api.length)];
 
+
 export const locationsAutocomplete = (searchInput) => async (dispatch) => {
   try {
     const { data } = await axios.get(
@@ -27,12 +28,7 @@ export const locationsAutocomplete = (searchInput) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    const errors = error.response;
-    if (errors) {
-      errors.forEach((e) => {
-        dispatch(setAlert(e.msg, 'danger'));
-      });
-    }
+    dispatch(setAlert(`Cant get weather ${error.message}`, 'danger'));
     dispatch({
       type: LOCATIONS_AUTOCOMPLETE_ERROR,
       payload: error.message,
@@ -60,7 +56,11 @@ export const setMyLocation = (lat, lon) => async (dispatch) => {
         name: data.LocalizedName,
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    dispatch(
+      setAlert(`Cant get weather in your location: ${error.message}`, 'danger')
+    );
+  }
 };
 
 export const getCurrentWeather = (locationKey) => async (dispatch) => {
@@ -79,6 +79,7 @@ export const getCurrentWeather = (locationKey) => async (dispatch) => {
         type: CURRENT_WEATHER_FAIL,
         payload: error.message,
       });
+      dispatch(setAlert(`Cant get weather ${error.message}`, 'danger'));
     }
   }
 };
@@ -98,6 +99,7 @@ export const getFiveDaysWeather = (locationKey) => async (dispatch) => {
       type: FIVE_DAYS_FAIL,
       payload: error.message,
     });
+    dispatch(setAlert(`Cant get weather ${error.message}`, 'danger'));
   }
 };
 
@@ -118,5 +120,6 @@ export const getFavoriteWeather = (location) => async (dispatch) => {
       type: FAVORITES_WEATHER_FAIL,
       payload: error.message,
     });
+    dispatch(setAlert(`Cant get weather ${error.message}`, 'danger'));
   }
 };
