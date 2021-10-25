@@ -3,6 +3,9 @@ abra / herolo weather app test
 
 ## link to the app: https://dor-weather.netlify.app/
 
+** if weather cards are not rendring its posiable that the accuweather service is blocking you from fetching data because of apiKey over use.
+in this case try to refrash the page to get a new one 
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
