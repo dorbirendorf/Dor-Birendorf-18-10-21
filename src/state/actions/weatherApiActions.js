@@ -12,10 +12,10 @@ import {
 import axios from 'axios';
 import { setAlert } from './alertActions';
 
-const api = process.env.accuWeatherApiKey; // updated using netlify dashboard
+//const api = process.env.accuWeatherApiKey; // updated using netlify dashboard
 
-var accuWeatherApiKey = api[Math.floor(Math.random() * api.length)];
-
+//var accuWeatherApiKey = api[Math.floor(Math.random() * api.length)];
+var accuWeatherApiKey=process.env.accuWeatherApiKey
 
 export const locationsAutocomplete = (searchInput) => async (dispatch) => {
   try {
