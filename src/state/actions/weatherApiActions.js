@@ -16,6 +16,7 @@ import { setAlert } from './alertActions';
 
 //var accuWeatherApiKey = api[Math.floor(Math.random() * api.length)];
 var accuWeatherApiKey=process.env.accuWeatherApiKey
+console.log(accuWeatherApiKey)
 
 export const locationsAutocomplete = (searchInput) => async (dispatch) => {
   try {
